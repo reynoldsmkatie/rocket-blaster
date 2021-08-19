@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-09RZCC4ZK4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-09RZCC4ZK4");
+    </script>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=1200"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Rocket Blaster" />
+    <meta
+      name="description"
+      content="You have 10 seconds to fuel a rocket. See how far you can make it blast off!"
+    />
+    <meta
+      property="og:title"
+      content="You have 10 seconds to fuel a rocket. See how far you can make it blast off!"
+    />
+    <meta
+      property="og:url"
+      content="https://www.codeeverydamnday.com/projects/rocketblaster/index.html"
+    />
+    <meta
+      property="og:description"
+      content="You have 10 seconds to fuel a rocket. See how far you can make it blast off!"
+    />
+    <meta property="og:image" content="images/rocketblastercta.png" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="images/rocketfire.svg" />
+    <link
+      rel="apple-touch-icon"
+      href="../../images/rckt-blstr-media-preview.png"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js" defer></script>
+    <title>Rocket Blaster | Code Every Damn Day</title>
+  </head>
+
+  <body id="bodytag">
+    <div id="overlay" draggable="false">
+      <div id="overlaytext">
+        <h1>Rocket Blaster</h1>
+        <p style="font-size: 16px">
+          You have
+          <span
+            style="
+              font-weight: bold;
+              font-size: 20px;
+              background: #f5e63a;
+              padding: 0px 5px;
+            "
+            >10 SECONDS</span
+          >
+          to pump as much fuel into the rocket as you can. See how far you can
+          make it blast off!
+        </p>
+        <br />
+        <p style="font-size: 16px">
+          Click the "PUMP" toggle repeatedly to fuel the rocket.
+        </p>
+        <p>&nbsp;</p>
+        <div
+          id="readytoplaybutton"
+          style="text-align: center"
+          style="z-index: 100"
+        >
+          <button id="readytoplay" onclick="readyToPlay();">Ready?</button>
+          <p>&nbsp;</p>
+          <p>
+            &larr; Back to
+            <a href="/index.html">CodeEveryDamnDay.com</a>
+          </p>
+          <p>&nbsp;</p>
+          <div style="text-align: center">
+            <img
+              style="width: 40%"
+              src="../../images/hand-coded-with-love-one-line.png"
+              alt="Hand-Coded with Love by Planet Katie"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Instructions Overlay-->
+    <div id="overlaystartgame" style="display: none" draggable="false"></div>
+    <!-- <button id="startgame">Start Game</button> -->
+    <table
+      style="
+        display: inline-block;
+        position: absolute;
+        left: 350px;
+        margin-top: 60px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            display: inline-block;
+            width: 380px;
+            text-align: center;
+            padding: 5px 10px 0px 10px;
+          "
+          id="gametimerafter"
+        ></td>
+      </tr>
+    </table>
+    <table
+      style="
+        display: inline-block;
+        position: absolute;
+        position: absolute;
+        left: 550px;
+        top: 200px;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      "
+    >
+      <tr>
+        <td
+          style="
+            display: inline-block;
+            width: 380px;
+            text-align: center;
+            padding: 10px 10px 0px 10px;
+          "
+          id="gametimerbefore"
+        >
+          <button class="displaychange" id="startgame" onclick="startTimer();">
+            Start Game
+          </button>
+        </td>
+      </tr>
+    </table>
+    <div
+      class="displaychange"
+      id="overlayend"
+      style="display: none"
+      draggable="false"
+    >
+      <div id="overlayendtext">
+        <p
+          style="
+            font-size: 36px;
+            font-weight: bold;
+            padding: 10px 20px;
+            width: 250px;
+            color: white;
+            background-color: rgb(51, 0, 62);
+            border-radius: 15px;
+          "
+        >
+          TIME'S UP
+        </p>
+        <p>&nbsp;</p>
+        <p id="finalscore" style="font-size: 40px; font-weight: bold"></p>
+        <p>&nbsp;</p>
+        <p>
+          <button id="newgame" onclick="blastOff();">
+            Watch it blast off!
+          </button>
+        </p>
+      </div>
+      <!-- ends overlayendtext-->
+    </div>
+    <!-- ends overlayend div-->
+
+    <div id="playagain" style="display: none" draggable="false">
+      <div id="playagaintext">
+        <p id="level"></p>
+        <br />
+        <p>
+          <button id="playagainbutton" onclick="window.location.reload();">
+            Play Again?
+          </button>
+        </p>
+        <br />
+        <p>
+          &larr; Back to
+          <a href="/index.html">CodeEveryDamnDay.com</a>
+        </p>
+      </div>
+      <!-- ends overlayendtext-->
+    </div>
+
+    <div id="destinationmessage"></div>
+    <div id="art">
+      <img id="nowhere" src="images/tonowhere.svg" />
+      <img id="moon" src="images/tomoon.svg" />
+      <img id="mars" src="images/tomars.svg" />
+      <img id="saturn" src="images/tosaturn.svg" />
+      <img id="neptune" src="images/toneptune.svg" />
+      <img id="aliens" src="images/toaliens.svg" />
+      <img id="rocketfire" src="images/rocketfireright.png" />
+      <img id="rocketdud" src="images/rocketfire.png" />
+      <img
+        draggable="false"
+        src="images/rocketscene5.svg"
+        style="position: absolute; left: -30px; top: 10px; z-index: 5"
+        id="rocketscene"
+        class="displaychange"
+        alt="Cartoon scene showing a stick figure pumping rocket fuel from a fuel tank to a rocket"
+      />
+      <div class="displaychange" id="pumpline"></div>
+      <div class="displaychange" id="arrow1"></div>
+      <div class="displaychange" id="arrow2"></div>
+      <div class="displaychange" id="arrow3"></div>
+      <table>
+        <tr>
+          <td class="displaychange" id="clickrepeatedly">
+            Click<br />Repeatedly!
+          </td>
+        </tr>
+      </table>
+      <table id="fuellevelcontainer">
+        <tr>
+          <td style="vertical-align: bottom; text-align: center">
+            <div class="displaychange" id="fuellevel"></div>
+          </td>
+        </tr>
+      </table>
+      <div id="pump">
+        <img
+          draggable="false"
+          src="images/playerpumpup2.svg"
+          style="position: absolute; left: 450px; top: 140px; z-index: 10"
+          id="pumpposition"
+          class="displaychange"
+          alt="Stick figure pumping what looks like a bike pump"
+        />
+      </div>
+      <div class="displaychange" id="pumpswitch">
+        <label class="switch">
+          <input type="checkbox" id="pumptoggle" onclick="switchitUp()" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+  </body>
+</html>
